@@ -1,28 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import PodcastList from './components/PodcastList';
 import './App.css';
 
 function App() {
+  const [podcasts, setPodcasts] = useState(null);
+
+  const fetchFeed = async () => {
+    const { feed } = await (
+      await fetch('https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json')
+    ).json();
+
+    setPodcasts(feed.entry);
+  };
+
+  useEffect(() => {
+    if (podcasts === null) {
+      fetchFeed();
+    }
+  });
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit
-          {' '}
-          <code>src/App.js</code>
-          {' '}
-          and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {
+        podcasts && (
+          <PodcastList podcasts={podcasts} />
+        )
+      }
     </div>
   );
 }
