@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import PodcastList from './components/PodcastList';
+import PodcastFilter from './components/PodcastFilter';
 import './App.css';
 
 function App() {
   const [podcasts, setPodcasts] = useState(null);
+  const [filter, setFilter] = useState('');
 
   useEffect(() => {
     const fetchFeed = async () => {
@@ -21,7 +23,10 @@ function App() {
     <div className="App">
       {
         podcasts && (
-          <PodcastList podcasts={podcasts} />
+          <>
+            <PodcastFilter placeholder="Filter podcasts..." stateChanger={setFilter} />
+            <PodcastList podcasts={podcasts} filter={filter} />
+          </>
         )
       }
     </div>
