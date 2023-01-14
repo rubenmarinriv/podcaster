@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import moment from 'moment/moment';
 import List from './components/Feed/List';
 import Filter from './components/Feed/Filter';
 import './App.css';
@@ -8,14 +9,30 @@ function App() {
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
-    const fetchFeed = async () => {
-      const response = await fetch('https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json');
-      const data = await response.json();
+    // Updates the feed when it is not saved or more than a day has passed since the last save
+    const storedFeed = JSON.parse(localStorage.getItem('feed'));
+    const daysSinceFetched = storedFeed !== null
+      ? moment().diff(moment(storedFeed.fetchDate), 'days') : 0;
 
-      setFeed(data.feed);
+    const fetchFeed = async () => {
+      try {
+        const response = await fetch('https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json');
+        const data = await response.json();
+
+        localStorage.setItem('feed', JSON.stringify(Object.assign(data.feed, {
+          fetchDate: new Date(),
+        })));
+        setFeed(data.feed);
+      } catch (error) {
+        console.error(error);
+      }
     };
 
-    fetchFeed();
+    if (storedFeed !== null && daysSinceFetched < 1) {
+      setFeed(storedFeed);
+    } else {
+      fetchFeed();
+    }
   }, []);
 
   return (
