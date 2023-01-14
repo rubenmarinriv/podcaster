@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function PodcastFilter({ placeholder, stateChanger }) {
+function Filter({ placeholder, stateChanger }) {
   // Updates parent filter
   const handleOnChange = (e) => {
     stateChanger(e.target.value);
@@ -12,9 +12,9 @@ function PodcastFilter({ placeholder, stateChanger }) {
   );
 }
 
-PodcastFilter.propTypes = {
+Filter.propTypes = {
   placeholder: PropTypes.string.isRequired,
   stateChanger: PropTypes.func.isRequired,
 };
 
-export default PodcastFilter;
+export default Filter;

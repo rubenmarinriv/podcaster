@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import PodcastList from './components/PodcastList';
-import PodcastFilter from './components/PodcastFilter';
+import List from './components/Feed/List';
+import Filter from './components/Feed/Filter';
 import './App.css';
 
 function App() {
-  const [podcasts, setPodcasts] = useState(null);
+  const [feed, setFeed] = useState(null);
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
     const fetchFeed = async () => {
-      const { feed } = await (
-        await fetch('https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json')
-      ).json();
+      const response = await fetch('https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json');
+      const data = await response.json();
 
-      setPodcasts(feed.entry);
+      setFeed(data.feed);
     };
 
     fetchFeed();
@@ -22,10 +21,10 @@ function App() {
   return (
     <div className="App">
       {
-        podcasts && (
+        feed && (
           <>
-            <PodcastFilter placeholder="Filter podcasts..." stateChanger={setFilter} />
-            <PodcastList podcasts={podcasts} filter={filter} />
+            <Filter placeholder="Filter podcasts..." stateChanger={setFilter} />
+            <List array={feed.entry} filter={filter} />
           </>
         )
       }
