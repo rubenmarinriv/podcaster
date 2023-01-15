@@ -13,13 +13,18 @@ function Root() {
   const { feed } = useLoaderData();
   const [filter, setFilter] = useState('');
 
+  const filteredFeed = feed.entry.filter((element) => (
+    element['im:artist'].label.toLowerCase().includes(filter)
+    || element['im:name'].label.toLowerCase().includes(filter)
+  ));
+
   return (
     <div>
       {
         feed && (
           <>
-            <Filter placeholder="Filter podcasts..." stateChanger={setFilter} />
-            <List array={feed.entry} filter={filter} />
+            <Filter count={filteredFeed.length} placeholder="Filter podcasts..." stateChanger={setFilter} />
+            <List array={filteredFeed} filter={filter} />
           </>
         )
       }
