@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Row from 'react-bootstrap/Row';
 import Item from './Item';
 
 function List({ array }) {
@@ -14,9 +15,9 @@ function List({ array }) {
   ));
 
   return (
-    <ul className="Feed">
-      { listItems }
-    </ul>
+    <Row>
+      {listItems}
+    </Row>
   );
 }
 

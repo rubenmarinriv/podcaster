@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import Container from 'react-bootstrap/Container';
 import getFeed from '../feed';
 import List from '../components/Feed/List';
 import Filter from '../components/Feed/Filter';
@@ -22,10 +23,14 @@ function Root() {
     <div>
       {
         feed && (
-          <>
-            <Filter count={filteredFeed.length} placeholder="Filter podcasts..." stateChanger={setFilter} />
+          <Container>
+            <Filter
+              count={filteredFeed.length}
+              placeholder="Filter podcasts..."
+              stateChanger={setFilter}
+            />
             <List array={filteredFeed} filter={filter} />
-          </>
+          </Container>
         )
       }
     </div>
