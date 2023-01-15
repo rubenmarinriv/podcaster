@@ -1,14 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import './index.css';
-import App from './App';
+import { loader as rootLoader, Root } from './routes/root';
+import Podcast from './routes/podcast';
 import reportWebVitals from './reportWebVitals';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
+    element: <Root />,
+    loader: rootLoader,
+  },
+  {
+    path: 'podcast/:podcastId',
+    element: <Podcast />,
   },
 ]);
 

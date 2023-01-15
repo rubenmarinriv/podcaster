@@ -11,6 +11,7 @@ function List({ array, filter }) {
   const listItems = applyFilter(array).map((element) => (
     <Item
       key={element.id.attributes['im:id'].toString()}
+      link={`podcast/${element.id.attributes['im:id'].toString()}`}
       image={element['im:image'][2].label}
       title={element['im:name'].label}
       author={element['im:artist'].label}
