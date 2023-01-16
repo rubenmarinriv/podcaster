@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { loader as rootLoader, Root } from './routes/root';
+import { loader as rootLoader, Root } from './routes/root/root';
 import Podcast from './routes/podcast';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';

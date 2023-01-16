@@ -1,5 +1,5 @@
 import moment from 'moment/moment';
-import config from './config';
+import config from '../config';
 
 export default async () => {
   // Gets the feed when it is not saved or more than a day has passed since the last save

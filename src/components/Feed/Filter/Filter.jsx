@@ -12,7 +12,7 @@ function Filter({ count, placeholder, stateChanger }) {
   };
 
   return (
-    <Row>
+    <Row data-testid="feed-filter">
       <Col className="mb-5 text-end">
         <Badge
           className="me-2 p-1 fs-6"

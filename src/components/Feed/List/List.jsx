@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Row from 'react-bootstrap/Row';
-import Item from './Item';
+import Item from '../Item/Item';
 
 function List({ array }) {
   const listItems = array.map((element) => (
@@ -15,7 +15,7 @@ function List({ array }) {
   ));
 
   return (
-    <Row>
+    <Row data-testid="feed-list">
       {listItems}
     </Row>
   );
