@@ -12,9 +12,11 @@ export default async () => {
       const response = await fetch(config.feedUrl);
       const data = await response.json();
 
-      localStorage.setItem('feed', JSON.stringify(Object.assign(data.feed, {
-        fetchDate: moment().format(),
-      })));
+      if (response.ok) {
+        localStorage.setItem('feed', JSON.stringify(Object.assign(data.feed, {
+          fetchDate: moment().format(),
+        })));
+      }
     } catch (error) {
       console.error(error);
     }

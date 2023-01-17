@@ -19,5 +19,7 @@ module.exports = {
   ],
   rules: {
     'no-console': 'off',
+    'react/no-danger': 'off',
+    'import/no-extraneous-dependencies': 'off',
   },
 };

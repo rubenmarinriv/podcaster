@@ -31,7 +31,9 @@ test('it should have the right link', async () => {
 });
 
 test('it should have the right image', async () => {
-  expect(screen.getByText('Frosted Tips with Lance Bass').previousElementSibling).toHaveAttribute('src', 'https://is3-ssl.mzstatic.com/image/thumb/Podcasts113/v4/07/88/b3/0788b35f-1829-6fbd-2488-ecaf83b8d8ab/mza_9852863690630397024.jpg/170x170bb.png');
+  expect(window.getComputedStyle(
+    screen.getByText('Frosted Tips with Lance Bass').previousElementSibling,
+  ).backgroundImage).toBe('url(https://is3-ssl.mzstatic.com/image/thumb/Podcasts113/v4/07/88/b3/0788b35f-1829-6fbd-2488-ecaf83b8d8ab/mza_9852863690630397024.jpg/170x170bb.png)');
 });
 
 test('it should display the right title', async () => {
@@ -39,5 +41,5 @@ test('it should display the right title', async () => {
 });
 
 test('it should display the right author', async () => {
-  expect(screen.getByText('iHeartPodcasts')).toBeInTheDocument();
+  expect(screen.getByText('Author: iHeartPodcasts')).toBeInTheDocument();
 });

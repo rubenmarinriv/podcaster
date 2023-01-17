@@ -24,7 +24,7 @@ const setup = (data) => {
 
 test('it should get a feed from the loader', async () => {
   const { feed } = await rootLoader();
-  expect(feed).toBeInstanceOf(Object);
+  expect(feed).toBeOneOf([null, expect.toBeObject()]);
 });
 
 test('it should render root route', async () => {
